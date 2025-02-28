@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>🌙 Munia's Celestial Countdown</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(45deg, #0a043c, #2a2356);
+            color: #f0e6ef;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+        }
+
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 0.5em;
+            text-shadow: 0 0 15px #e2d1f9;
+            animation: glow 2s infinite alternate;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .time-unit {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 1rem 2rem;
+            border-radius: 15px;
+            min-width: 120px;
+        }
+
+        .number {
+            font-size: 2.5em;
+            font-weight: bold;
+            display: block;
+            color: #fff3b0;
+        }
+
+        .label {
+            font-size: 1.1em;
+            opacity: 0.9;
+            letter-spacing: 1px;
+        }
+
+        #message {
+            font-size: 1.4em;
+            margin-top: 2rem;
+            line-height: 1.6;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #e2d1f9; }
+            to { text-shadow: 0 0 20px #f0e6ef, 0 0 30px #e2d1f9; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="dynamic-title">Munia's Lunar Odyssey</h1>
+        
+        <div class="countdown">
+            <div class="time-unit">
+                <span class="number" id="days">00</span>
+                <span class="label">Moon Cycles</span>
+            </div>
+            <div class="time-unit">
+                <span class="number" id="hours">00</span>
+                <span class="label">Stellar Hours</span>
+            </div>
+            <div class="time-unit">
+                <span class="number" id="minutes">00</span>
+                <span class="label">Galactic Minutes</span>
+            </div>
+            <div class="time-unit">
+                <span class="number" id="seconds">00</span>
+                <span class="label">Cosmic Seconds</span>
+            </div>
+        </div>
+
+        <p id="message">The universe gathers stardust for your crown...</p>
+    </div>
+
+    <script>
+        // Bangladeshi Timezone (UTC+6)
+        const birthday = new Date('2024-03-18T00:00:00+06:00').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const diff = birthday - now;
+
+            if (diff < 0) {
+                document.getElementById('message').innerHTML = 
+                    "🌕 Happy Birthday, Celestial Muse!<br>The moon has learned new phases to celebrate you.";
+                document.querySelector('.countdown').style.display = 'none';
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000;
+
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+
+            // Poetic messages
+            const messages = [
+                ${days} lunar breaths until your dawn,
+                ${hours} tides still bow to your night,
+                ${minutes} stardust moments suspended,
+                ${seconds} moonbeams weaving your crown
+            ];
+            document.getElementById('message').innerHTML = messages[Math.floor(Math.random() * messages.length)];
+        }
+
+        // Initialize
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // Alternate titles
+        const titles = [
+            "Munia: Night's Living Poetry",
+            "Selenophile, Moon's First Language",
+            "For Whom Constellations Blush",
+            "Architect of Twilight"
+        ];
+        let titleIndex = 0;
+        setInterval(() => {
+            document.getElementById('dynamic-title').innerHTML = titles[titleIndex];
+            titleIndex = (titleIndex + 1) % titles.length;
+        }, 7000);
+    </script>
+</body>
+</html>
